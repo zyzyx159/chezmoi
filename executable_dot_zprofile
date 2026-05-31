@@ -1,0 +1,16 @@
+# Add to ~/.zprofile
+[[ -f ~/.profile ]] && source ~/.profile
+
+# gives Thunar access to Dbus
+if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
+  eval $(dbus-launch --sh-syntax --exit-with-session)
+fi
+
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_TYPE=wayland
+export DISPLAY=:0
+
+# launch Sway automatically on TTY1
+if [[ -z $DISPLAY ]] && [[ "$(tty)" == /dev/tty1 ]]; then
+  exec dbus-run-session sway
+fi

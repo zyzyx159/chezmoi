@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+  <widget name="shutdown"/>
+  <widget name="reboot"/>
+  <widget name="suspend"/>
+</menu>

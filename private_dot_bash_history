@@ -1,0 +1,70 @@
+ip a
+ip a
+ip a
+ip a
+ip a
+cd /etc/greetd
+ls
+nano config.toml
+clear
+clear
+sudo xbps-install -Su
+sudo xbps-install sway elogind polkit dbus kitty wofi git nano greetd gtkgreet gnupg2 wget mesa-demos noto-fonts-ttf noto-fonts-emoji xtools mesa-dri mesa-vulkan-intel intel-video-accel oxygen-icons papirus-icon-theme gsettings-desktop-schemas pipewire wireplumber gcc NetworkManager ModemManager Waybar bluez blueman unzip jq make base-devel tmux stow zsh zoxide fastfetch fzf starship lsd seatd neovim
+sudo ln -s /etc/sv/elogind /var/servicesudo ln -s /etc/sv/dbus /var/servicesudo sv enable dbussudo mkdir -p /etc/pipewire/pipewire.conf.dsudo ln -s /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/   sudo mkdir -p /etc/alsa/conf.dsudo ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d/sudo ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d/ sudo ln -s /etc/sv/seatd /var/service  
+sudo ln -s /etc/sv/elogind /var/service
+sudo ln -s /etc/sv/dbus /var/service
+sudo sv enable dbus
+sudo mkdir -p /etc/pipewire/pipewire.conf.d
+sudo ln -s /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/ 
+sudo mkdir -p /etc/alsa/conf.d
+sudo ln -s /usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d/
+sudo ln -s /usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d/ 
+sudo ln -s /etc/sv/seatd /var/service
+sudo nano /etc/greetd/config.toml
+sudo nano /etc/greetd/sway-config
+sudo visudo
+chsh -s $(which zsh)
+sudo reboot
+ls
+ll
+ls -al
+nano .bash_profile
+ls -al
+nano .profile
+ls -al
+nano .zshrc
+ls -al
+nano .zprofile 
+ls -al
+nano .profile 
+sudo reboot
+s
+ls
+ls -al
+nano .bash_profile 
+sudo reboot
+suod halt
+sudo halt
+ls
+ll
+ls -al
+nvim .bash_profile 
+exec dbus-run-session sway
+ls
+ls -al
+exec sway
+mmcli -L
+cd /var/services
+cd /var
+ls
+cd service
+ls
+sudo xbps-remove ModemManage
+sudo xbps-remove ModemManager
+ls
+cd 
+~
+ls
+ls -al
+nvim .zprofile 
+sudo reboot

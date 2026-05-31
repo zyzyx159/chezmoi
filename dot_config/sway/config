@@ -1,0 +1,144 @@
+# Default config for sway
+
+exec dbus-update-activation-environment --all
+exec setxkbmap -query || true
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term kitty
+# Your preferred application launcher
+set $menu wofi --gtk-dark
+
+#
+# Custom Tmux prefix mode
+#
+ mode "tmux" {
+    # Launch a new Terminal
+    bindsym Return exec $term; mode "default"
+
+    # Kill focused menu
+    bindsym BackSpace kill; mode "default"
+
+    # Launch Wofi ($menu)
+    bindsym --release Super_L exec $menu; mode "default"
+
+    # Switch to workspace
+    bindsym 1 workspace number 1; mode "default"
+    bindsym 2 workspace number 2; mode "default"
+    bindsym 3 workspace number 3; mode "default"
+    bindsym 4 workspace number 4; mode "default"
+    bindsym 5 workspace number 5; mode "default"
+    bindsym 6 workspace number 6; mode "default"
+    bindsym 7 workspace number 7; mode "default"
+    bindsym 8 workspace number 8; mode "default"
+    bindsym 9 workspace number 9; mode "default"
+    bindsym 0 workspace number 10; mode "default"
+    # Move focused container to workspace
+    bindsym Shift+1 move container to workspace number 1; mode "default"
+    bindsym Shift+2 move container to workspace number 2; mode "default"
+    bindsym Shift+3 move container to workspace number 3; mode "default"
+    bindsym Shift+4 move container to workspace number 4; mode "default"
+    bindsym Shift+5 move container to workspace number 5; mode "default"
+    bindsym Shift+6 move container to workspace number 6; mode "default"
+    bindsym Shift+7 move container to workspace number 7; mode "default"
+    bindsym Shift+8 move container to workspace number 8; mode "default"
+    bindsym Shift+9 move container to workspace number 9; mode "default"
+    bindsym Shift+0 move container to workspace number 10; mode "default"
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+
+    #exit tmux mode without doing anything
+    bindsym Escape mode "default"
+ }
+
+# Bind Ctrl-s to enter the "tmux" node
+bindsym --release Super_L mode "tmux"
+
+#
+# power managment mode
+#
+set $mode_power (l)ock, (e)xit, (r)eboot, (s)hutdown
+
+mode "power" {
+    bindsym l exec swaylock, mode "default"
+    bindsym e exec swaymsg exit, mode "default"
+    bindsym r exec reboot, mode "default"
+    bindsym s exec shutdown -p now, mode "default"
+
+    # Retrun to default mode, AKA cancel
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+  }
+
+#
+# screen lock
+#
+bindsym $mod+l exec swaylock -c 000000
+
+#
+# Utilities:
+#
+    # Special keys to adjust volume via PulseAudio
+    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+    # Special keys to adjust brightness via brightnessctl
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+    # Special key to take a screenshot with grim
+    bindsym Print exec grim
+#
+# network manager
+#
+exec --no-startup-id 'nm-applet --indicator'
+
+#
+# enable Sound
+#
+exec pipewire -c pipewire.conf
+
+#
+# Cursor
+#
+set $xcursor_theme Adwaita
+set $xcursor_size 24
+seat seat0 xcursor_theme $xcursor_theme $xcursor_size
+
+#
+# start Devmon for automount USB
+#
+exec --no-startup-id devmon --no-gui
+
+#
+# Start apps
+#
+exec blueman-applet #BlueTooth manager
+exec swaync #Notification Deamon
+exec_always waybar
+
+# Float the SSH password prompt based on the title defined in the script
+for_window [title="SSH Authentication"] floating enable, resize set 400 150, move position center
+
+include etc/sway/config.d/*
+
+#
+# Run polkit rules
+#   This rule allows me to run Gparted
+#
+exec /usr/libexec/polkit-gnome-authentication-agent-1
+
+#
+# Reload sway config
+#
+bindsym Mod4+Shift+c Reload
+
+include config.d/$(hostname)
