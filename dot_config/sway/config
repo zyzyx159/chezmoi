@@ -1,6 +1,8 @@
 # Default config for sway
 
-exec dbus-update-activation-environment --all
+#exec dbus-update-activation-environment --all
+exec dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway XDG_RUNTIME_DIR DBUS_SESSION_BUS_ADDRESS
+
 exec setxkbmap -query || true
 
 ### Variables
