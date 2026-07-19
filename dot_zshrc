@@ -66,7 +66,7 @@ LC_ALL=en_US.UTF-8
 # Custom aliases
 alias ls="lsd"
 alias ll="lsd -alF"
-alias ghpush="bash ~/.bin/local/GHPush.sh"
+alias ghpush="bash ~/.local/bin/GHPush.sh"
 alias fetch="fastfetch" #whatever version of fetch I am using right now
 alias lz="lazygit"
 alias vi="nvim"
