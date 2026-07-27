@@ -42,7 +42,7 @@ vim.keymap.set("n", "<leader>m", "<Cmd>NvimTreeFocus<CR>", { desc = "Focus on Fi
 vim.keymap.set("n", "<leader>e", "<Cmd>NvimTreeToggle<CR>", { desc = "Toggle File Explorer" })
 
 -- Insert mode move one character to the right by default
-vim.keymap.set("n", "i", "a", { noremap = true, silent = true })
+-- vim.keymap.set("n", "i", "a", { noremap = true, silent = true })
 
 -- word count for creative writing
 vim.keymap.set('n', '<leader>wc', '<cmd>echo "Words: " .. wordcount().words<CR>', { silent = true })
