@@ -55,7 +55,7 @@ set $menu wofi --gtk-dark
     # We just use 1-10 as the default.
 
     #exit tmux mode without doing anything
-    bindsym Escape mode "default"
+    bindsym Control+g mode "default"
  }
 
 #
