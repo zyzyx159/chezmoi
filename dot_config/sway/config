@@ -3,6 +3,12 @@
 #exec dbus-update-activation-environment --all
 exec dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway XDG_RUNTIME_DIR DBUS_SESSION_BUS_ADDRESS
 
+# Update D-Bus and systemd environments for Flatpaks, Portals, and Keyrings
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+
+# Start GNOME Keyring daemon secrets component
+exec gnome-keyring-daemon --start --components=secrets
+
 exec setxkbmap -query || true
 
 ### Variables
