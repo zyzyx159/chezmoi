@@ -64,8 +64,20 @@ LC_CTYPE=en_US.UTF-8
 LC_ALL=en_US.UTF-8
 
 # Custom aliases
-alias ls="lsd"
-alias ll="lsd -alF"
+if [ "$TERM" = "xterm-kitty" ] && command -v kitty >/dev/null 2>&1; then
+  alias ssh="kitty +kitten ssh"
+else
+  alias ssh="ssh"
+fi
+
+if comand -v lsd >/dev/null 2>&1; then
+  alias ls="lsd"
+  alias ll="lsd -alF"
+else
+  alias ls="ls"
+  alias ll="lA"
+fi
+
 alias ghpush="bash ~/.local/bin/GHPush.sh"
 alias fetch="fastfetch" #whatever version of fetch I am using right now
 alias lz="lazygit"
