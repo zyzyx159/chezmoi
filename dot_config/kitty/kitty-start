@@ -1,6 +1,3 @@
 # First window: launch tmux session (active by default)
-launch --title "tmux" tmux
-
-# Second window: default shell
 new_tab
 launch zsh
