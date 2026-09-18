@@ -1,4 +1,7 @@
 .tmux/plugins/**
 .config/nvim/lazy-lock.json
 .config/nvim/spell/*.spl
+.bash_history
+.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml
+.config/Thunar/accels.scm
 
