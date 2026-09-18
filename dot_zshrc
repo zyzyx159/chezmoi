@@ -148,8 +148,10 @@ eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)" # lets you jump to frequently used directories.
 
 # Bind Home and End keys using terminfo
-[[ -n "${terminfo[khome]}" ]] && bindkey "${terminfo[khome]}" beginning-of-line
-[[ -n "${terminfo[kend]}"  ]] && bindkey "${terminfo[kend]}"  end-of-line
+#[[ -n "${terminfo[khome]}" ]] && bindkey "${terminfo[khome]}" beginning-of-line
+#[[ -n "${terminfo[kend]}"  ]] && bindkey "${terminfo[kend]}"  end-of-line
+bindkey '\e[H' beginning-of-line
+bindkey '\e[F' end-of-line
 
 # Run fetch
 fetch
