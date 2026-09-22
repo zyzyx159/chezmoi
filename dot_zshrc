@@ -16,9 +16,9 @@ if [ -d "/run/user/$(id -u)" ]; then
 fi
 
 # Ensure a D-Bus session is started and exported
-if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
-    eval $(dbus-launch --sh-syntax --exit-with-session)
-fi
+#if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
+#    eval $(dbus-launch --sh-syntax --exit-with-session)
+#fi
 
 # initialize Zsh's completion system
 autoload -U compinit && compinit
@@ -75,7 +75,7 @@ if comand -v lsd >/dev/null 2>&1; then
   alias ll="lsd -alF"
 else
   alias ls="ls"
-  alias ll="lA"
+  alias ll="la"
 fi
 
 alias ghpush="bash ~/.local/bin/GHPush.sh"

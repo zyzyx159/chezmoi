@@ -1,10 +1,9 @@
 #!/bin/sh
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=sway
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+export GTK_THEME=Adwaita:dark
+export MOZ_ENABLE_WAYLAND=1
 
-set -a
-
-[ -f "$HOME/.config/sway/env" ] && . "$HOME/.config/sway/env"
-[ -f "$HOME/.profile" ] && . "$HOME/.profile"
-
-set +a
-
-exec dbus-run-session sway --unsupported-gpu > /tmp/sway.log 2>&1
+exec dbus-run-session sway -d > "/home/zyzyx/sway.log" 2>&1

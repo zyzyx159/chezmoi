@@ -1,13 +1,10 @@
 # Default config for sway
+# Keep the session environment standard and avoid systemd-specific assumptions.
+exec dbus-update-activation-environment --all
+exec dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway XDG_SESSION_TYPE=wayland XDG_RUNTIME_DIR DBUS_SESSION_BUS_ADDRESS
 
-#exec dbus-update-activation-environment --all
-exec dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway XDG_RUNTIME_DIR DBUS_SESSION_BUS_ADDRESS
-
-# Update D-Bus and systemd environments for Flatpaks, Portals, and Keyrings
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
-
-# Start GNOME Keyring daemon secrets component
-exec gnome-keyring-daemon --start --components=secrets
+# Start GNOME Keyring daemon secrets component when available.
+exec --no-startup-id gnome-keyring-daemon --start --components=secrets
 
 exec setxkbmap -query || true
 
@@ -15,13 +12,10 @@ exec setxkbmap -query || true
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
-# Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
+
 # Your preferred terminal emulator
 set $term kitty
+
 # Your preferred application launcher
 set $menu wofi --gtk-dark
 
@@ -79,22 +73,6 @@ bindsym --release Super_L exec $menu
 bindsym Control+g mode "tmux"
 
 #
-# power managment mode
-#
-set $mode_power (l)ock, (e)xit, (r)eboot, (s)hutdown
-
-mode "power" {
-    bindsym l exec swaylock, mode "default"
-    bindsym e exec swaymsg exit, mode "default"
-    bindsym r exec reboot, mode "default"
-    bindsym s exec shutdown -p now, mode "default"
-
-    # Retrun to default mode, AKA cancel
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-  }
-
-#
 # screen lock
 #
 bindsym $mod+l exec swaylock -c 000000
@@ -112,6 +90,7 @@ bindsym $mod+l exec swaylock -c 000000
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
     bindsym Print exec grim
+
 #
 # network manager
 #
@@ -144,8 +123,6 @@ exec_always waybar
 # Float the SSH password prompt based on the title defined in the script
 for_window [title="SSH Authentication"] floating enable, resize set 400 150, move position center
 
-include etc/sway/config.d/*
-
 #
 # Run polkit rules
 #   This rule allows me to run Gparted
@@ -157,4 +134,5 @@ exec /usr/libexec/polkit-gnome-authentication-agent-1
 #
 bindsym Mod4+Shift+c Reload
 
-include config.d/$(hostname)
+# Include the machine-specific monitor configuration fragments.
+include config.d/*

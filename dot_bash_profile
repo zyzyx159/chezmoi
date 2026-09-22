@@ -4,4 +4,4 @@
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc
 [[ -f ~/.profile ]] && . ~/.profile
 
-exec dbus-run-session sway
+#exec dbus-run-session sway
