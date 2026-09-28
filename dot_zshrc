@@ -70,12 +70,16 @@ else
   alias ssh="ssh"
 fi
 
-if comand -v lsd >/dev/null 2>&1; then
-  alias ls="lsd"
-  alias ll="lsd -alF"
+# Modern ls configurations
+if [ -x /usr/sbin/lsd ] || command -v lsd >/dev/null 2>&1; then
+  _lsd_path="${:-/usr/sbin/lsd}"
+  [[ ! -x "$_lsd_path" ]] && _lsd_path="$(command -v lsd)"
+  
+  alias ls="$_lsd_path"
+  alias ll="$_lsd_path -lA"
 else
-  alias ls="ls"
-  alias ll="la"
+  alias ls="ls --color=auto"
+  alias ll="ls -la"
 fi
 
 alias ghpush="bash ~/.local/bin/GHPush.sh"
@@ -157,7 +161,7 @@ bindkey '\e[F' end-of-line
 fetch
 
 # load keychain and sshkey
-eval `keychain --eval $USER@$HOST`
+eval "$(keychain add --eval $USER@$HOST)"
 
 # Stuff for sway to make ask-pass work
 export SSH_ASKPASS='/usr/local/bin/yad-ssh-askpass'

@@ -12,10 +12,13 @@ exec setxkbmap -query || true
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
-
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
 # Your preferred terminal emulator
 set $term kitty
-
 # Your preferred application launcher
 set $menu wofi --gtk-dark
 
@@ -72,10 +75,25 @@ bindsym --release Super_L exec $menu
 # Bind Ctrl-g to enter the "tmux" node
 bindsym Control+g mode "tmux"
 
+# Focus a window when the pointer moves over it.
+focus_follows_mouse yes
+
+# Focus the adjacent container with Mod+h/j/k/l.
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# Move focused container with Mod+Shift+h/j/k/l
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
 #
 # screen lock
 #
-bindsym $mod+l exec swaylock -c 000000
+#bindsym $mod+l exec swaylock -c 000000
 
 #
 # Utilities:

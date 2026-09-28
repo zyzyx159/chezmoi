@@ -6,4 +6,9 @@ export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 export GTK_THEME=Adwaita:dark
 export MOZ_ENABLE_WAYLAND=1
 
-exec dbus-run-session sway -d > "/home/zyzyx/sway.log" 2>&1
+# Uncomment for logging
+#exec dbus-run-session sway -d > "/home/zyzyx/git/linuxFix/sway.log" 2>&1
+
+# for no logging
+exec dbus-run-session sway --unsupported-gpu -d > /dev/null 2>&1
+
