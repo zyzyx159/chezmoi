@@ -7,10 +7,11 @@
 
 return {
 	"nvim-lualine/lualine.nvim",
-	config = function()
+  dependencies = { "catppuccin" },
+  config = function()
 		require("lualine").setup({
 			options = {
-				theme = "catppuccin",
+				theme = require ("lualine.themes.catppuccin"),
 				icons_enabled = true,
 				section_separators = { left = "", right = "" },
 				component_separators = "|",

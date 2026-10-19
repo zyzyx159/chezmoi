@@ -117,7 +117,9 @@ exec --no-startup-id 'nm-applet --indicator'
 #
 # enable Sound
 #
-exec pipewire -c pipewire.conf
+exec pipewire
+exec pipewire-pulse
+exec wireplumber
 
 #
 # Cursor
@@ -146,6 +148,23 @@ for_window [title="SSH Authentication"] floating enable, resize set 400 150, mov
 #   This rule allows me to run Gparted
 #
 exec /usr/libexec/polkit-gnome-authentication-agent-1
+
+#
+# Dark Mode
+#
+
+# Gnome
+set $gnome-schema org.gnome.desktop.interface
+exec_always {
+    gsettings set $gnome-schema color-scheme 'prefer-dark'
+    export GTK_THEME=Adwaita-dark
+}
+
+# Qt
+exec_always export QT_QPA_PLATFORMTHEME=qt5ct
+
+# Portal / freedesktop
+exec gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 #
 # Reload sway config

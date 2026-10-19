@@ -7,11 +7,11 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit load "zsh-users/zsh-syntax-highlighting"
 zinit load "zsh-users/zsh-autosuggestions"
 zinit load "zsh-users/zsh-completions"
-zinit light Aloxaf/fzf-tab
+zinit light Aloxaffzf-tab
 
 # pulseaudio, pipewire, wireplumber
 # Export the runtime dir if it exists
-if [ -d "/run/user/$(id -u)" ]; then
+if [ -d "run/user/$(id -u)" ]; then
     export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 fi
 
@@ -75,8 +75,8 @@ if [ -x /usr/sbin/lsd ] || command -v lsd >/dev/null 2>&1; then
   _lsd_path="${:-/usr/sbin/lsd}"
   [[ ! -x "$_lsd_path" ]] && _lsd_path="$(command -v lsd)"
 
-  alias ls="$_lsd_path"
-  alias ll="$_lsd_path -lA"
+  alias ls="$_lsd_path --group-dirs first --icon=always"
+  alias ll="$_lsd_path -lA --group-dirs first --icon=always"
 else
   alias ls="ls --color=auto"
   alias ll="ls -la"
