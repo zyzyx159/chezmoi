@@ -74,13 +74,23 @@ fi
 if [ -x /usr/sbin/lsd ] || command -v lsd >/dev/null 2>&1; then
   _lsd_path="${:-/usr/sbin/lsd}"
   [[ ! -x "$_lsd_path" ]] && _lsd_path="$(command -v lsd)"
-  
+
   alias ls="$_lsd_path"
   alias ll="$_lsd_path -lA"
 else
   alias ls="ls --color=auto"
   alias ll="ls -la"
 fi
+
+# Automatically run lsd after changing directories
+chpwd() {
+    emulate -L zsh
+    if [[ -x $(command -v lsd) ]]; then
+        lsd --group-dirs first --icon=always
+    else
+        ls --color=auto --group-directories-first
+    fi
+}
 
 alias ghpush="bash ~/.local/bin/GHPush.sh"
 alias fetch="fastfetch" #whatever version of fetch I am using right now
