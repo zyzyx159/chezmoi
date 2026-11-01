@@ -7,7 +7,7 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit load "zsh-users/zsh-syntax-highlighting"
 zinit load "zsh-users/zsh-autosuggestions"
 zinit load "zsh-users/zsh-completions"
-zinit light Aloxaffzf-tab
+zinit load "Aloxaf/fzf-tab"
 
 # pulseaudio, pipewire, wireplumber
 # Export the runtime dir if it exists
@@ -172,6 +172,7 @@ fetch
 
 # load keychain and sshkey
 eval "$(keychain add --eval $USER@$HOST)"
+eval `keychain --eval $USER@$HOST`
 
 # Stuff for sway to make ask-pass work
 export SSH_ASKPASS='/usr/local/bin/yad-ssh-askpass'
