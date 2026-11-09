@@ -1,25 +1,26 @@
 -- ================================================================================================
 -- TITLE : lualine.nvim
 -- LINKS :
---   > github : https://github.com/nvim-lualine/lualine.nvim
+--   > github : https://github.com
 -- ABOUT : A blazing fast and easy to configure Neovim statusline written in Lua.
 -- ================================================================================================
 
 return {
 	"nvim-lualine/lualine.nvim",
-  dependencies = { "catppuccin" },
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	event = "VeryLazy",
   config = function()
 		require("lualine").setup({
 			options = {
-				theme = require ("lualine.themes.catppuccin"),
+				theme = "auto",
 				icons_enabled = true,
 				section_separators = { left = "", right = "" },
 				component_separators = "|",
 			},
-      tabline = {
-        lualine_a = {'buffers'}
-      }
+			tabline = {
+				lualine_a = { "buffers" },
+			},
 		})
 	end,
-	dependencies = { "nvim-tree/nvim-web-devicons" },
 }
+

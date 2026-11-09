@@ -14,6 +14,7 @@ return {
     require("catppuccin").setup({
       flavour = "mocha",
       integrations = {
+        lualine = true,
         notify = true,
         treesitter = true,
         gitsigns = true,

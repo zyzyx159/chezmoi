@@ -11,8 +11,8 @@ return {
 	event = { "BufReadPost", "BufNewFile" },
 	lazy = false,
 	config = function()
-		require("nvim-treesitter.configs").setup({
-			-- language parsers that MUST be installed
+		-- Use the new install API instead of configs.setup
+		require("nvim-treesitter").install({
 			ensure_installed = {
 				"bash",
 				"c",
@@ -33,22 +33,21 @@ return {
 				"vue",
 				"yaml",
 			},
-			auto_install = true, -- auto-install any other parsers on opening new language files
+			auto_install = true,
 			sync_install = false,
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = false,
-			},
-			indent = { enable = true },
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<CR>",
-					node_incremental = "<CR>",
-					scope_incremental = "<TAB>",
-					node_decremental = "<S-TAB>",
-				},
-			},
+		})
+
+		-- Enable native treesitter highlighting automatically for files
+		vim.api.nvim_create_autocmd("FileType", {
+			callback = function()
+				local buf = vim.api.nvim_get_current_buf()
+				-- Only start treesitter if a valid parser is installed for the filetype
+				local lang = vim.treesitter.language.get_lang(vim.bo.filetype)
+				if lang and pcall(vim.treesitter.start, buf, lang) then
+					-- Successfully started native syntax highlighting
+				end
+			end,
 		})
 	end,
 }
+
